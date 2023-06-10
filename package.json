@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch ./src/index.js",
+    "start": "node ./src/index.js",
+    "migration": "node ./src/migration.js"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +24,12 @@
   },
   "engines": {
     "node": "18.12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/henriquesdias/SpeedIO-Test-Backend"
+  },
+  "devDependencies": {
+    "prettier": "2.8.8"
   }
 }
