@@ -24,11 +24,25 @@ async function getTheTop100MostVisited() {
   const urls = await urlsRepositories.getTheTop100MostVisited();
   return urls.rows;
 }
+async function deleteUrl(id, user_id) {
+  const url = await urlsRepositories.getUniqueUrl(id);
+  if (url.rowCount === 0) {
+    throw { name: "notFound", message: "This url do not exists" };
+  }
+  if (url.rows[0].user_id !== user_id) {
+    throw {
+      name: "unauthorized",
+      message: "You dont hava permission to exclude this data",
+    };
+  }
+  await urlsRepositories.deleteUrl(id);
+}
 
 const urlsServices = {
   createUrl,
   getShortenedUrl,
   getTheTop100MostVisited,
+  deleteUrl,
 };
 
 export default urlsServices;

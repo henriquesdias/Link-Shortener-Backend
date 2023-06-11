@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node --watch ./src/index.js",
     "start": "node ./src/index.js",
-    "migration": "node ./src/migration.js"
+    "migration": "node ./src/migration.js",
+    "lint": "npx eslint src/*/*.js"
   },
   "keywords": [],
   "author": "",

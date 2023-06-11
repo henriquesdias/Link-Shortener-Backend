@@ -30,11 +30,28 @@ async function getTheTop100MostVisited(req, res) {
     res.sendStatus(400);
   }
 }
+async function deleteUrl(req, res) {
+  const { id } = req.params;
+  const { user_id } = res.locals;
+  try {
+    await urlsServices.deleteUrl(id, user_id);
+    res.status(201).send("ok");
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    if (error.name === "unauthorized") {
+      return res.sendStatus(401);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const urlControllers = {
   createUrl,
   redirectToUrl,
   getTheTop100MostVisited,
+  deleteUrl,
 };
 
 export default urlControllers;

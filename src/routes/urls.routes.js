@@ -15,6 +15,7 @@ urlRouters
     urlControllers.createUrl
   )
   .get("/urls/open/:shortened_url", urlControllers.redirectToUrl)
-  .get("/urls", urlControllers.getTheTop100MostVisited);
+  .get("/urls", urlControllers.getTheTop100MostVisited)
+  .delete("/urls/:id", validateToken, urlControllers.deleteUrl);
 
 export default urlRouters;
