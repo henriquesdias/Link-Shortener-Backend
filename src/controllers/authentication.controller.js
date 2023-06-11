@@ -12,9 +12,22 @@ async function signUp(req, res) {
     res.sendStatus(400);
   }
 }
+async function signIn(req, res) {
+  try {
+    const { email, password } = res.locals.body;
+    const token = await authenticationServices.signIn(email, password);
+    res.status(200).send({ token });
+  } catch (error) {
+    if (error.name === "unauthorized") {
+      return res.sendStatus(401);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const authenticationController = {
   signUp,
+  signIn,
 };
 
 export default authenticationController;
