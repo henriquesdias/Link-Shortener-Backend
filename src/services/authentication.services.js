@@ -19,9 +19,8 @@ async function signIn(email, password) {
   ) {
     const token = jwt.sign(
       {
-        userId: user.rows[0].id,
+        user_id: user.rows[0].id,
       },
-      // eslint-disable-next-line
       process.env.JWT_SECRET
     );
     return token;
