@@ -18,7 +18,7 @@ async function createTables() {
   );
   await connection.query(`  CREATE TABLE visits (
     id SERIAL PRIMARY KEY,
-    "visited_url" INTEGER NOT NULL REFERENCES "urls"("id"),
+    "visited_url_id" INTEGER NOT NULL REFERENCES "urls"("id"),
     "created_at" DATE DEFAULT NOW() NOT NULL
   );`);
 }

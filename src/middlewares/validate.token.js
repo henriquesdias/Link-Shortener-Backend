@@ -4,7 +4,7 @@ async function validateToken(req, res, next) {
   const { authorization } = req.headers;
   const receivedToken = authorization?.replace("Bearer ", "");
   if (!receivedToken) {
-    res.locals.user_id = null;
+    res.locals.user_id = undefined;
     next();
     return;
   }

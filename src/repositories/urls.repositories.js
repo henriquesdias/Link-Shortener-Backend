@@ -12,14 +12,15 @@ async function getShortenedUrl(shortened_url) {
   ]);
 }
 async function newVisit(id) {
-  return connection.query(`INSERT INTO visits ("visited_url") VALUES ($1);`, [
-    id,
-  ]);
+  return connection.query(
+    `INSERT INTO visits ("visited_url_id") VALUES ($1);`,
+    [id]
+  );
 }
 async function getTheTop100MostVisited() {
-  return connection.query(`SELECT urls.*, COUNT(visits.visited_url) AS num_visits
+  return connection.query(`SELECT urls.*, COUNT(visits.visited_url_id) AS num_visits
   FROM urls
-  LEFT JOIN visits ON urls.id = visits.visited_url
+  LEFT JOIN visits ON urls.id = visits.visited_url_id
   GROUP BY urls.id
   ORDER BY num_visits DESC
   LIMIT 100;`);
@@ -28,7 +29,9 @@ async function getUniqueUrl(id) {
   return connection.query(`SELECT * FROM urls WHERE id = $1;`, [id]);
 }
 async function deleteUrl(id) {
-  await connection.query(`DELETE FROM visits WHERE "visited_url" = $1;`, [id]);
+  await connection.query(`DELETE FROM visits WHERE "visited_url_id" = $1;`, [
+    id,
+  ]);
   return connection.query(`DELETE FROM urls WHERE id = $1;`, [id]);
 }
 

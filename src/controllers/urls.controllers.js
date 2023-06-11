@@ -35,7 +35,7 @@ async function deleteUrl(req, res) {
   const { user_id } = res.locals;
   try {
     await urlsServices.deleteUrl(id, user_id);
-    res.status(201).send("ok");
+    res.sendStatus(200);
   } catch (error) {
     if (error.name === "notFound") {
       return res.sendStatus(404);
