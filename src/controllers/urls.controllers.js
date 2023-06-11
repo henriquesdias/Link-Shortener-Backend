@@ -10,9 +10,22 @@ async function createUrl(req, res) {
     res.sendStatus(400);
   }
 }
+async function redirectToUrl(req, res) {
+  const { shortened_url } = req.params;
+  try {
+    const url = await urlsServices.getShortenedUrl(shortened_url);
+    res.status(200).redirect(url);
+  } catch (error) {
+    if (error.name === "notFound") {
+      return res.sendStatus(404);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const urlControllers = {
   createUrl,
+  redirectToUrl,
 };
 
 export default urlControllers;

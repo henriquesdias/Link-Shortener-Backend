@@ -6,9 +6,15 @@ async function createUrl({ url, user_id, shortened_url }) {
     [url, shortened_url, user_id]
   );
 }
+async function getShortenedUrl(shortened_url) {
+  return connection.query(`SELECT * FROM urls WHERE "shortened_url" = $1`, [
+    shortened_url,
+  ]);
+}
 
 const urlsRepositories = {
   createUrl,
+  getShortenedUrl,
 };
 
 export default urlsRepositories;

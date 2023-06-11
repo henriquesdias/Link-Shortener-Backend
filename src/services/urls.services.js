@@ -12,9 +12,17 @@ async function createUrl(url, user_id) {
   });
   return newUrl.rows[0];
 }
+async function getShortenedUrl(shortened_url) {
+  const url = await urlsRepositories.getShortenedUrl(shortened_url);
+  if (url.rowCount === 0) {
+    throw { name: "notFound", message: "This url do not exists" };
+  }
+  return url.rows[0].url;
+}
 
 const urlsServices = {
   createUrl,
+  getShortenedUrl,
 };
 
 export default urlsServices;

@@ -7,11 +7,13 @@ import validateToken from "../middlewares/validate.token.js";
 
 const urlRouters = Router();
 
-urlRouters.post(
-  "/urls",
-  validateToken,
-  validateBody(urlsSchema.newUrl),
-  urlControllers.createUrl
-);
+urlRouters
+  .post(
+    "/urls",
+    validateToken,
+    validateBody(urlsSchema.newUrl),
+    urlControllers.createUrl
+  )
+  .get("/urls/open/:shortened_url", urlControllers.redirectToUrl);
 
 export default urlRouters;
