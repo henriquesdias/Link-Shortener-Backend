@@ -14,6 +14,7 @@ urlRouters
     validateBody(urlsSchema.newUrl),
     urlControllers.createUrl
   )
-  .get("/urls/open/:shortened_url", urlControllers.redirectToUrl);
+  .get("/urls/open/:shortened_url", urlControllers.redirectToUrl)
+  .get("/urls", urlControllers.getTheTop100MostVisited);
 
 export default urlRouters;

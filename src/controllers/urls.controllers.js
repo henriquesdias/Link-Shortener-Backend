@@ -22,10 +22,19 @@ async function redirectToUrl(req, res) {
     res.sendStatus(400);
   }
 }
+async function getTheTop100MostVisited(req, res) {
+  try {
+    const urls = await urlsServices.getTheTop100MostVisited();
+    res.status(200).send(urls);
+  } catch (error) {
+    res.sendStatus(400);
+  }
+}
 
 const urlControllers = {
   createUrl,
   redirectToUrl,
+  getTheTop100MostVisited,
 };
 
 export default urlControllers;

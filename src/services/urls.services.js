@@ -17,12 +17,18 @@ async function getShortenedUrl(shortened_url) {
   if (url.rowCount === 0) {
     throw { name: "notFound", message: "This url do not exists" };
   }
+  await urlsRepositories.newVisit(url.rows[0].id);
   return url.rows[0].url;
+}
+async function getTheTop100MostVisited() {
+  const urls = await urlsRepositories.getTheTop100MostVisited();
+  return urls.rows;
 }
 
 const urlsServices = {
   createUrl,
   getShortenedUrl,
+  getTheTop100MostVisited,
 };
 
 export default urlsServices;

@@ -18,14 +18,17 @@ async function createTables() {
   );
   await connection.query(`  CREATE TABLE visits (
     id SERIAL PRIMARY KEY,
-    "visited_url" INTEGER NOT NULL REFERENCES "urls"("id")
+    "visited_url" INTEGER NOT NULL REFERENCES "urls"("id"),
+    "created_at" DATE DEFAULT NOW() NOT NULL
   );`);
 }
 
 createTables()
   .then(() => {
+    // eslint-disable-next-line
     console.log("Tables created successfully.");
   })
   .catch((error) => {
+    // eslint-disable-next-line
     console.log(error);
   });
