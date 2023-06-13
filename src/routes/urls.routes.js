@@ -14,8 +14,8 @@ urlRouters
     validateBody(urlsSchema.newUrl),
     urlControllers.createUrl
   )
-  .get("/urls/open/:shortened_url", urlControllers.redirectToUrl)
-  .get("/urls", urlControllers.getTheTop100MostVisited)
+  .get("/:shortened_url", urlControllers.redirectToUrl)
+  .get("/urls/ranking", urlControllers.getTheTop100MostVisited)
   .delete("/urls/:id", validateToken, urlControllers.deleteUrl);
 
 export default urlRouters;

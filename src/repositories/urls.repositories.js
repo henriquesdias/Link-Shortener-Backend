@@ -18,12 +18,26 @@ async function newVisit(id) {
   );
 }
 async function getTheTop100MostVisited() {
-  return connection.query(`SELECT urls.*, COUNT(visits.visited_url_id) AS num_visits
-  FROM urls
-  LEFT JOIN visits ON urls.id = visits.visited_url_id
-  GROUP BY urls.id
-  ORDER BY num_visits DESC
-  LIMIT 100;`);
+  return connection.query(`SELECT
+  u.url,
+  SUM(v.visit_count) AS num_visits
+FROM
+  urls u
+JOIN (
+  SELECT
+    visited_url_id,
+    COUNT(*) AS visit_count
+  FROM
+    visits
+  GROUP BY
+    visited_url_id
+) v ON u.id = v.visited_url_id
+GROUP BY
+  u.url
+ORDER BY
+  num_visits DESC
+LIMIT
+  100;`);
 }
 async function getUniqueUrl(id) {
   return connection.query(`SELECT * FROM urls WHERE id = $1;`, [id]);

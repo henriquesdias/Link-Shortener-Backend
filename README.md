@@ -118,7 +118,7 @@ Successful response:
  }
 ```
 
-### 4. GET /urls/open/:shortened_url
+### 4. GET /:shortened_url
 
 Redirects the user at webiste associated with shortened URL. The 'shortened_url' params must be a valid string.
 
@@ -126,7 +126,7 @@ Successful response:
 
 - Status 200
 
-### 5. GET /urls
+### 5. GET /urls/ranking
 
 Get the most 100 urls visited.
 
