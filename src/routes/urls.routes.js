@@ -16,6 +16,7 @@ urlRouters
   )
   .get("/:shortened_url", urlControllers.redirectToUrl)
   .get("/urls/ranking", urlControllers.getTheTop100MostVisited)
+  .get("/urls/my-urls", validateToken, urlControllers.getPersonalUrls)
   .delete("/urls/:id", validateToken, urlControllers.deleteUrl);
 
 export default urlRouters;

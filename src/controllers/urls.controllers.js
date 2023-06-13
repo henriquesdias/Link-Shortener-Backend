@@ -46,12 +46,25 @@ async function deleteUrl(req, res) {
     res.sendStatus(400);
   }
 }
+async function getPersonalUrls(req, res) {
+  const { user_id } = res.locals;
+  try {
+    const urls = await urlsServices.getPersonalUrls(user_id);
+    res.status(200).send(urls);
+  } catch (error) {
+    if (error.name === "unauthorized") {
+      return res.sendStatus(401);
+    }
+    res.sendStatus(400);
+  }
+}
 
 const urlControllers = {
   createUrl,
   redirectToUrl,
   getTheTop100MostVisited,
   deleteUrl,
+  getPersonalUrls,
 };
 
 export default urlControllers;

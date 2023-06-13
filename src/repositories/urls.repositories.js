@@ -48,6 +48,9 @@ async function deleteUrl(id) {
   ]);
   return connection.query(`DELETE FROM urls WHERE id = $1;`, [id]);
 }
+async function getPersonalUrls(user_id) {
+  return connection.query(`SELECT * FROM urls WHERE "user_id" = $1`, [user_id]);
+}
 
 const urlsRepositories = {
   createUrl,
@@ -56,6 +59,7 @@ const urlsRepositories = {
   getTheTop100MostVisited,
   getUniqueUrl,
   deleteUrl,
+  getPersonalUrls,
 };
 
 export default urlsRepositories;

@@ -166,3 +166,25 @@ This is the required format of the authorization if you wants to send:
 Successful response:
 
 - Status 200
+
+### 7. GET /urls/my-urls
+
+Get all URLS of a unique user.
+Successful response:
+
+- Status 200
+- Body :
+
+```code
+  [
+    {
+      "id": 14,
+      "url": "https://app.daily.dev/",
+      "shortened_url": "dhymvtm46",
+      "user_id": null,
+      "created_at": "2023-06-11T03:00:00.000Z",
+      "num_visits": "0"
+    }
+  ]
+
+```

@@ -37,12 +37,20 @@ async function deleteUrl(id, user_id) {
   }
   await urlsRepositories.deleteUrl(id);
 }
+async function getPersonalUrls(user_id) {
+  if (!user_id) {
+    throw { name: "unauthorized", message: "the user_id is invalid" };
+  }
+  const urls = await urlsRepositories.getPersonalUrls(user_id);
+  return urls.rows;
+}
 
 const urlsServices = {
   createUrl,
   getShortenedUrl,
   getTheTop100MostVisited,
   deleteUrl,
+  getPersonalUrls,
 };
 
 export default urlsServices;
