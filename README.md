@@ -1,4 +1,4 @@
-# SpeedIO Test
+# Link Shortener
 
 An easy and practical link shortener.
 
